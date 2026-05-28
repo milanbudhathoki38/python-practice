@@ -1,10 +1,11 @@
-# Python Practice — OOP Bank Account System
+# Chase Bank — OOP Bank Account System in Python
 
-A command-line bank account system built in Python demonstrating OOP concepts including inheritance, polymorphism, and method overriding. Built as part of learning Python after C++.
+A command-line banking system built in Python demonstrating OOP concepts including inheritance, polymorphism, and method overriding. Built as part of learning Python after C++.
 
 ## Features
 - Create checking or savings accounts
 - Deposit and withdraw with validation
+- Transaction history tracking
 - Apply interest to savings accounts
 - Overdraft protection for checking accounts
 
@@ -13,12 +14,13 @@ A command-line bank account system built in Python demonstrating OOP concepts in
 - `bank.py` — main program with interactive menu
 
 ## Run
-```bash
+\`\`\`bash
 python3 bank.py
-```
+\`\`\`
 
 ## Concepts Demonstrated
 - Classes and constructors
 - Inheritance and super()
 - Method overriding
 - f-strings and input/output
+- Lists for transaction history

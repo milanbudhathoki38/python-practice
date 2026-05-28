@@ -1,15 +1,16 @@
 from account import Account, SavingsAccount, CheckingAccount
 
 def show_menu():
-    print("\n--- Bank Menu ---")
+    print("\n--- Chase Bank Menu ---")
     print("1. Check balance")
     print("2. Deposit")
     print("3. Withdraw")
     print("4. Apply interest (Savings only)")
-    print("5. Exit")
+    print("5. Transaction history")
+    print("6. Exit")
 
 def main():
-    print("Welcome to Milan's Bank!")
+    print("Welcome to Chase Bank!")
     name = input("Enter your name: ")
     acc_type = input("Account type (checking/savings): ").lower()
 
@@ -40,6 +41,8 @@ def main():
             else:
                 print("Only savings accounts earn interest.")
         elif choice == "5":
+            account.get_history()
+        elif choice == "6":
             print("Goodbye!")
             break
         else:
