@@ -1,0 +1,24 @@
+# Python Practice — OOP Bank Account System
+
+A command-line bank account system built in Python demonstrating OOP concepts including inheritance, polymorphism, and method overriding. Built as part of learning Python after C++.
+
+## Features
+- Create checking or savings accounts
+- Deposit and withdraw with validation
+- Apply interest to savings accounts
+- Overdraft protection for checking accounts
+
+## Files
+- `account.py` — Account, SavingsAccount, CheckingAccount classes
+- `bank.py` — main program with interactive menu
+
+## Run
+```bash
+python3 bank.py
+```
+
+## Concepts Demonstrated
+- Classes and constructors
+- Inheritance and super()
+- Method overriding
+- f-strings and input/output
