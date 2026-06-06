@@ -21,7 +21,9 @@ def main():
     else:
         account = Account(name, 0)
 
-    print(f"\nAccount created! {account}")
+    print(f"\nAccount created!")
+    print(f"Account Number: {account.account_number}")
+    print(f"Account Type: {account}")
 
     while True:
         show_menu()

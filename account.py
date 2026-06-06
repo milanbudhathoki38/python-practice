@@ -1,8 +1,10 @@
+import random
 class Account:
     def __init__(self, owner, balance = 0):
         self.owner = owner
         self.balance = balance
         self.transactions =[]
+        self.account_number = random.randint(10000000, 99999999)
 
     def deposit( self, amount):
         if amount <= 0:
@@ -35,7 +37,8 @@ class Account:
             print(f"{i}. {t}")
 
     def __str__(self):
-        return f"Account[{self.owner}] — Balance: ${self.balance:.2f}"
+        def __str__(self):
+            return f"Account[{self.owner}] — Acc#: {self.account_number} — Balance: ${self.balance:.2f}"
 
 
 class SavingsAccount(Account):
@@ -61,6 +64,7 @@ class CheckingAccount(Account):
         if amount > self.balance + self.overdraft_limit:
             print(f"Exceeds overdraft limit of ${self.overdraft_limit:.2f}.")
             return
+        self.transactions.append(f"Withdrew ${amount:.2f}")
         self.balance -= amount
         print(f"Withdrew ${amount:.2f}. New balance: ${self.balance:.2f}")
 
