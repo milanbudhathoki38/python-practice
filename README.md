@@ -29,9 +29,15 @@ python3 bank.py
 - Random number generation for account numbers
 
 ## Planned Improvements
+=======
+- Lists for transaction history
+
+ ## Planned Improvements
+
 - Save account data to a file so balance persists after closing
 - Multiple accounts — create and switch between accounts
 - Transfer money between accounts
 - Interest history tracking
 - Input validation with try/except for invalid entries
 - Admin mode to view all accounts
+
