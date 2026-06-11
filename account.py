@@ -56,6 +56,19 @@ class SavingsAccount(Account):
 
 
 class CheckingAccount(Account):
+    def deposit(self, amount):
+        if amount <= 0:
+            print("Deposit Amount must be positive")
+            return
+        if amount > 10000:
+            print(f"Deposit limit exceeded! Maximum single deposit is $10, 000.00")
+            return
+        self.balance += amount
+        self.transactions.append(f"Deposited ${amount: .2f}")
+        print(f"Deposited ${amount: .2f}. New balnce: ${self.balance: .2f}")
+        
+        
+
     def __init__(self, owner, balance=0, overdraft_limit=100):
         super().__init__(owner, balance)
         self.overdraft_limit = overdraft_limit

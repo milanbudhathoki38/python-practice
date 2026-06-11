@@ -4,7 +4,7 @@ A command-line banking system built in Python demonstrating OOP concepts includi
 
 ## Features
 - Create checking, savings, or regular accounts
-- Deposit and withdraw with validation
+- Deposit and withdraw with validation and deposit limit
 - Transaction history tracking
 - Apply interest to savings accounts
 - Overdraft protection for checking accounts
