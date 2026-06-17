@@ -23,7 +23,7 @@ class Account:
             return
         self.balance -= amount
         self.transactions.append(f"Withdrew ${amount:.2f}")
-        print(f"Withdrew ${amount:.2f}. New Balance: ${self.balance:>2f}")
+        print(f"Withdrew ${amount:.2f}. New Balance: ${self.balance:.2f}")
 
     def get_balance(self):
         print(f"{self.owner} 's balance: ${self.balance:.2f}")
@@ -37,8 +37,7 @@ class Account:
             print(f"{i}. {t}")
 
     def __str__(self):
-        def __str__(self):
-            return f"Account[{self.owner}] — Acc#: {self.account_number} — Balance: ${self.balance:.2f}"
+        return f"Account[{self.owner}] — Acc#: {self.account_number} — Balance: ${self.balance:.2f}"
 
 
 class SavingsAccount(Account):
@@ -67,8 +66,6 @@ class CheckingAccount(Account):
         self.transactions.append(f"Deposited ${amount: .2f}")
         print(f"Deposited ${amount: .2f}. New balnce: ${self.balance: .2f}")
         
-        
-
     def __init__(self, owner, balance=0, overdraft_limit=100):
         super().__init__(owner, balance)
         self.overdraft_limit = overdraft_limit
