@@ -4,7 +4,9 @@ class Account:
         self.owner = owner
         self.balance = balance
         self.transactions =[]
+        self.undo_stack = []
         self.account_number = random.randint(10000000, 99999999)
+        
 
     def deposit( self, amount):
         if amount <= 0:
@@ -12,6 +14,7 @@ class Account:
             return
         self.balance += amount
         self.transactions.append(f"Deposited ${amount:.2f}")
+        self.undo_stack.append(('withdraw', amount))
         print(f"Deposited ${amount:.2f}. New balance: ${self.balance:.2f}")
 
     def withdraw(self, amount):
@@ -23,7 +26,22 @@ class Account:
             return
         self.balance -= amount
         self.transactions.append(f"Withdrew ${amount:.2f}")
+        self.undo_stack.append(('deposit', amount))
         print(f"Withdrew ${amount:.2f}. New Balance: ${self.balance:.2f}")
+
+    def undo(self):
+        if not self.undo_stack:
+            print("Nothing to undo.")
+            return
+        action, amount = self.undo_stack.pop()
+        if action == 'deposit':
+            self.balance += amount
+            self.transactions.append(f"[UNDO] Deposited ${amount:.2f}")
+            print(f"Undo successful. Deposited ${amount:.2f} back. New balance: ${self.balance:.2f}")
+        elif action == 'withdraw':
+            self.balance -= amount
+            self.transactions.append(f"[UNDO] Withdrew ${amount:.2f}")
+            print(f"Undo successful. Withdrew ${amount:.2f} back. New balance: ${self.balance:.2f}")
 
     def get_balance(self):
         print(f"{self.owner} 's balance: ${self.balance:.2f}")
@@ -64,6 +82,7 @@ class CheckingAccount(Account):
             return
         self.balance += amount
         self.transactions.append(f"Deposited ${amount: .2f}")
+        self.undo_stack.append(('withdraw', amount))
         print(f"Deposited ${amount: .2f}. New balnce: ${self.balance: .2f}")
         
     def __init__(self, owner, balance=0, overdraft_limit=100):
@@ -75,9 +94,10 @@ class CheckingAccount(Account):
             print(f"Exceeds overdraft limit of ${self.overdraft_limit:.2f}.")
             return
         self.transactions.append(f"Withdrew ${amount:.2f}")
+
         self.balance -= amount
         print(f"Withdrew ${amount:.2f}. New balance: ${self.balance:.2f}")
-
+        self.undo_stack.append(('deposit', amount))
     def __str__(self):
         return f"CheckingAccount[{self.owner}] — Balance: ${self.balance:.2f} | Overdraft: ${self.overdraft_limit:.2f}"
 

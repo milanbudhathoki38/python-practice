@@ -7,7 +7,9 @@ def show_menu():
     print("3. Withdraw")
     print("4. Apply interest (Savings only)")
     print("5. Transaction history")
-    print("6. Exit")
+    print("6. Undo last transaction")
+    print("7. Exit")
+    
 
 def main():
     print("Welcome to Chase Bank!")
@@ -45,6 +47,8 @@ def main():
         elif choice == "5":
             account.get_history()
         elif choice == "6":
+             account.undo()
+        elif choice == "7":
             print("Goodbye!")
             break
         else:
