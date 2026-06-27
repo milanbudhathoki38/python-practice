@@ -9,6 +9,7 @@ A command-line banking system built in Python demonstrating OOP concepts includi
 - Apply interest to savings accounts
 - Overdraft protection for checking accounts
 - Auto-generated unique account number on creation
+- Undo last transactions (stack LIFO behavior)
 
 ## Files
 - `account.py` — Account, SavingsAccount, CheckingAccount classes
