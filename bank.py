@@ -1,4 +1,7 @@
-from account import Account, SavingsAccount, CheckingAccount
+from account import (
+    Account, SavingsAccount, CheckingAccount,
+    InsufficientFundsError, InvalidAmountError, OverdraftLimitExceededError
+)
 
 def show_menu():
     print("\n--- Chase Bank Menu ---")
@@ -35,10 +38,20 @@ def main():
             account.get_balance()
         elif choice == "2":
             amount = float(input("Deposit amount: $"))
-            account.deposit(amount)
+            try:
+                account.deposit(amount)
+            except InvalidAmountError as e:
+                print(f"Deposit failed: {e}")
         elif choice == "3":
             amount = float(input("Withdraw amount: $"))
-            account.withdraw(amount)
+            try:
+                account.withdraw(amount)
+            except OverdraftLimitExceededError as e:
+                print(f"Withdrawal failed (overdraft): {e}")
+            except InsufficientFundsError as e:
+                print(f"Withdrawal failed: {e}")
+            except InvalidAmountError as e:
+                print(f"Withdrawal failed: {e}")
         elif choice == "4":
             if isinstance(account, SavingsAccount):
                 account.apply_interest()

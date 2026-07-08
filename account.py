@@ -1,4 +1,17 @@
 import random
+class InsufficientFundsError(Exception):
+    """Raised when a withdrawal exceeds the available balance."""
+    pass
+
+
+class InvalidAmountError(Exception):
+    """Raised when a deposit or withdrawal amount is zero or negative."""
+    pass
+
+
+class OverdraftLimitExceededError(InsufficientFundsError):
+    """Raised when a checking withdrawal exceeds balance plus overdraft limit."""
+    pass
 class Account:
     def __init__(self, owner, balance = 0):
         self.owner = owner
@@ -10,20 +23,17 @@ class Account:
 
     def deposit( self, amount):
         if amount <= 0:
-            print("Deposit amount must be positive. ")
-            return
+            raise InvalidAmountError("Deposit amount must be positive.")
         self.balance += amount
         self.transactions.append(f"Deposited ${amount:.2f}")
         self.undo_stack.append(('withdraw', amount))
         print(f"Deposited ${amount:.2f}. New balance: ${self.balance:.2f}")
 
     def withdraw(self, amount):
-        if amount <=0:
-            print("Amount must be positive.")
-            return
+        if amount <= 0:
+            raise InvalidAmountError("Withdrawal amount must be positive.")
         if amount > self.balance:
-            print("Insufficinet funds.")
-            return
+            raise InsufficientFundsError(f"Cannot withdraw ${amount:.2f} — balance is ${self.balance:.2f}")
         self.balance -= amount
         self.transactions.append(f"Withdrew ${amount:.2f}")
         self.undo_stack.append(('deposit', amount))
@@ -75,8 +85,7 @@ class SavingsAccount(Account):
 class CheckingAccount(Account):
     def deposit(self, amount):
         if amount <= 0:
-            print("Deposit Amount must be positive")
-            return
+            raise InvalidAmountError("Deposit amount must be positive.")
         if amount > 10000:
             print(f"Deposit limit exceeded! Maximum single deposit is $10, 000.00")
             return
@@ -91,8 +100,9 @@ class CheckingAccount(Account):
 
     def withdraw(self, amount):
         if amount > self.balance + self.overdraft_limit:
-            print(f"Exceeds overdraft limit of ${self.overdraft_limit:.2f}.")
-            return
+            raise OverdraftLimitExceededError(
+                f"Exceeds overdraft limit of ${self.overdraft_limit:.2f}."
+            )
         self.transactions.append(f"Withdrew ${amount:.2f}")
 
         self.balance -= amount
